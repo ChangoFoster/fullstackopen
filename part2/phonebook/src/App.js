@@ -22,7 +22,8 @@ const App = () => {
 
   const create = (name, number) => {
     const personObject = { name, number }
-    personService.create(personObject)
+    personService
+      .create(personObject)
       .then(newPerson => {
         setPersons(persons.concat(newPerson))
         setNewName('')
@@ -30,6 +31,12 @@ const App = () => {
         setError(false)
         setMessage(`Added ${newPerson.name}`)
         setTimeout(() => {setMessage(null)}, 3000)
+      })
+      .catch(error => {
+        const message = error.response.data.error
+        console.log(message)
+        setError(true)
+        setMessage(message)
       })
   }
 
