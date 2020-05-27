@@ -14,10 +14,9 @@ const App = () => {
   const [ error, setError ] = useState(false)
 
   useEffect(() => {
-    personService.getAll()
-      .then(initialPersons => {
-        setPersons(initialPersons)
-      })
+    personService
+      .getAll()
+      .then(initialPersons => { setPersons(initialPersons) })
   }, [])
 
   const create = (name, number) => {
@@ -32,18 +31,21 @@ const App = () => {
         setMessage(`Added ${newPerson.name}`)
         setTimeout(() => {setMessage(null)}, 3000)
       })
+      //START OF SECTION ADDED FOR PART 3
       .catch(error => {
         const message = error.response.data.error
         console.log(message)
         setError(true)
         setMessage(message)
+        setTimeout(() => { setMessage(null) }, 3000)
       })
+      //END OF SECTION ADDED FOR PART 3
   }
 
   const remove = id => {
-    const removePerson = persons.find(p => p.id === id)
+    const removePerson = persons.find(person => person.id === id)
     const result = window.confirm(`Delete ${removePerson.name}`)
-    const updatedPersons = persons.filter(p => p !== removePerson)
+    const updatedPersons = persons.filter(person => person !== removePerson)
     if (result) {
       personService.remove(id)
         .then(response => {
@@ -59,13 +61,14 @@ const App = () => {
   }
 
   const update = (person, number) => {
-    const result = window.confirm(`${person.name} already exist, replace number?`)
+    const result = window
+      .confirm(`${person.name} already exist, replace number?`)
     if(result) {
       const personObject = { ...person, number: number }
       personService.update(person.id, personObject)
         .then(updatePerson => {
-          setPersons(persons.map(p => updatePerson.name === p.name
-            ? updatePerson : p)
+          setPersons(persons
+            .map(person => updatePerson.id === person.id ? updatePerson : person)
           )
           setNewName('')
           setNewNumber('')
@@ -76,8 +79,11 @@ const App = () => {
   const submitForm = (event) => {
     event.preventDefault()
     const currentPerson = persons.find(person => person.name === newName)
-    currentPerson
-      ? update(currentPerson, newNumber) : create(newName, newNumber)
+    if(currentPerson) {
+      update(currentPerson, newNumber)
+    } else {
+      create(newName, newNumber)
+    }
   }
 
   const success = { borderColor: 'green' }

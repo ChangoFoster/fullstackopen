@@ -9,6 +9,7 @@ const Content = ({course}) => {
     </div>
   )
 }
+
 const Part = ({part, exercises}) => <p>{part} {exercises}</p>
 
 const Total = ({course}) => {

@@ -44,7 +44,9 @@ const App = () => {
     if (listOfCountries().length > 10) {
       return <div>Too many</div>
     } else if (listOfCountries().length > 1) {
-      return <CountryList countries={listOfCountries()} handleClick={handleClick} />
+      return(
+        <CountryList countries={listOfCountries()} handleClick={handleClick} />
+      )
     } else if (listOfCountries().length === 1) {
       const country = listOfCountries()[0]
       setDetail(country)

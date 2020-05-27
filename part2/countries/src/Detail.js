@@ -2,8 +2,14 @@ import React from 'react'
 
 const WeatherDetail = ({city, weather}) => {
   const current = weather.current
-  const { temperature, weather_descriptions,
-    weather_icons, wind_dir, wind_speed } = current
+  const {
+    temperature,
+    weather_descriptions,
+    weather_icons,
+    wind_dir,
+    wind_speed
+  } = current
+  
   return (
     <div>
       <h3>Weather in {city}</h3>

@@ -1,9 +1,12 @@
 import React from 'react'
 
 const PersonForm = ({
-  handleNameChange, nameValue,
-  handleNumberChange, numberValue,
-  submit}) => {
+  handleNameChange,
+  nameValue,
+  handleNumberChange,
+  numberValue,
+  submit
+}) => {
 
   return (
     <form>
