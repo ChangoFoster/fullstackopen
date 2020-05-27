@@ -61,15 +61,15 @@ const App = () => {
   const update = (person, number) => {
     const result = window.confirm(`${person.name} already exist, replace number?`)
     if(result) {
-    const personObject = { ...person, number: number }
-    personService.update(person.id, personObject)
-      .then(updatePerson => {
-        setPersons(persons.map(p => updatePerson.name === p.name
-          ? updatePerson : p)
-        )
-        setNewName('')
-        setNewNumber('')
-      })
+      const personObject = { ...person, number: number }
+      personService.update(person.id, personObject)
+        .then(updatePerson => {
+          setPersons(persons.map(p => updatePerson.name === p.name
+            ? updatePerson : p)
+          )
+          setNewName('')
+          setNewNumber('')
+        })
     }
   }
 

@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom'
 
 const App = (props) => {
 
-  const initVotes = Array.apply(null, new Array(props.anecdotes.length))
+  const initVotes = Array
+    .apply(null, new Array(props.anecdotes.length))
     .map(Number.prototype.valueOf,0)
 
   const [selected, setSelected] = useState(0)
